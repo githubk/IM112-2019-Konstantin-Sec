@@ -40,6 +40,7 @@ public class DlgDonut extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgDonut() {
+		setTitle("Donut");
 		setBounds(100, 100, 262, 149);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

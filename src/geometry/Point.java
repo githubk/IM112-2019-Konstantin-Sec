@@ -9,6 +9,7 @@ package geometry;
  */
 import java.awt.Color;
 
+
 import java.awt.Graphics;
 
 public class Point extends Shape {
@@ -52,6 +53,8 @@ public class Point extends Shape {
 	}
 	
 	@Override
+	/*Tacka se iscrtava pomocu dve crte koje se seku
+	u poziciji x,y*/
 	public void draw(Graphics g) {
 		g.setColor(Color.BLACK);
 		g.drawLine(x + 2, y, x - 2, y);
@@ -59,6 +62,8 @@ public class Point extends Shape {
 	}
 	
 	@Override
+	/*Racuna udaljenost 2 tacke od koordinantnog pocetka(0,0) 
+	i vraca razliku izmedju dve udaljenosti kao ceo broj*/
 	public int compareTo(Object o) {
 		if(o instanceof Point) {
 			Point temp = (Point)o;
@@ -78,7 +83,7 @@ public class Point extends Shape {
 		this.x=this.x+dx;
 		this.y=this.y+dy;
 	}
-	
+	//Proverava da li se tacka nalazi unutar objekta
 	public boolean contains(int x, int y) {
 		return distance(x, y) <= 2;
 	}

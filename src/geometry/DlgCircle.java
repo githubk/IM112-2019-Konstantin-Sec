@@ -40,6 +40,7 @@ public class DlgCircle extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgCircle() {
+		setTitle("Circle");
 		setBounds(100, 100, 223, 120);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

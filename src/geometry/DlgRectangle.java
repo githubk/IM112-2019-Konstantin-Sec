@@ -42,7 +42,7 @@ public class DlgRectangle extends JDialog {
 	public DlgRectangle() {
 		setBounds(100, 100, 274, 201);
 		setModal(true);
-		setTitle("Unos dimenzija");
+		setTitle("Rectangle");
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

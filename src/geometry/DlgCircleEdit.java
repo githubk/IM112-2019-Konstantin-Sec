@@ -55,6 +55,7 @@ public class DlgCircleEdit extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgCircleEdit() {
+		setTitle("Modify Circle");
 		setBounds(100, 100, 313, 214);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

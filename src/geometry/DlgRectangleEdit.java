@@ -49,6 +49,7 @@ public class DlgRectangleEdit extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgRectangleEdit() {
+		setTitle("Modify rectangle");
 		setBounds(100, 100, 450, 300);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());

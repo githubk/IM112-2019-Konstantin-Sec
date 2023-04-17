@@ -73,6 +73,7 @@ public class DlgPoint extends JDialog {
 	 * Create the dialog.
 	 */
 	public DlgPoint() {
+		setTitle("Point");
 		setBounds(100, 100, 336, 236);
 		setModal(true);
 		getContentPane().setLayout(new BorderLayout());
