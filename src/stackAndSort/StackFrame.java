@@ -50,7 +50,7 @@ public class StackFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public StackFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		setTitle("Stack and sort");
 		setBounds(100, 100, 634, 410);

@@ -5,52 +5,57 @@ import java.awt.Graphics;
 
 public class Circle extends Shape {
 	
-	protected Point center;
-	protected int radius;
+	private Point center;
+	private int radius;
 	
-
 	public Circle() {
 		
 	}
 	
-	public Circle (Point center, int radius) {
-		this.center = center;
-		this.radius = radius;
+	public Circle (Point c, int r) {
+		this.center = c;
+		this.radius = r;			
 	}
 	
-	public Circle(Point center, int radius, boolean selected) {
-		this(center,radius);
+	public Circle (Point c, int r, boolean selected) {
+		this.center = c;
+		this.radius = r;
 		this.selected = selected;
-	}
-
-	public double area() {
-		return radius*radius*Math.PI;
 	}
 	
 	public double circumference() {
-		return radius*2*Math.PI;
+		return 2 * radius * Math.PI;	
+	}
+	
+	public double area() {
+		return radius * radius * Math.PI;
 	}
 	
 	public boolean contains(int x, int y) {
-		return (center.distance(x,y)<= radius);
+		return center.distance(x, y) <= radius;
 	}
 	
-	public boolean contains(Point p) {
-		return contains(p.getX(), p.getY());
-	}
+	public void draw(Graphics g) {
+		g.drawOval(center.getX()-radius, center.getY()-radius, radius*2, radius*2);
+		if(selected) {
+			g.drawRect(center.getX() - radius - 3, center.getY() - 3, 6, 6);
+			g.drawRect(center.getX() + radius - 3, center.getY() - 3, 6, 6);
+			g.drawRect(center.getX() - 3, center.getY() - radius - 3, 6, 6);
+			g.drawRect(center.getX() - 3, center.getY() + radius - 3, 6, 6);
+		}
 	
+	}
 	
 	@Override
 	public String toString() {
-		return "Center: " + center + ", radius: " + radius;
+		return "Center: " +center +", radius: " +radius;
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof Circle) {
 			Circle temp = (Circle)obj;
-			if(this.center.equals(temp.getCenter()) &&
-					this.radius == temp.getRadius()) {
+			if(temp.getCenter().equals(center) && temp.getRadius() == radius) {
 				return true;
 			}
 		}
@@ -58,10 +63,14 @@ public class Circle extends Shape {
 	}
 	
 	@Override
-	public void draw(Graphics g) {
-		g.drawOval(center.getX()-radius, center.getY()-radius,
-				radius*2, radius*2);
+	public void moveOn(int x, int y) {
+		center.moveOn(x, y);
 	}
+
+	@Override
+	public void moveBy(int dx, int dy) {
+		center.moveBy(dx, dy);
+	}	
 	
 	@Override
 	public int compareTo(Object o) {
@@ -72,40 +81,17 @@ public class Circle extends Shape {
 		return 0;
 	}
 	
-	
-	public void moveOn(int x, int y) {
-		center.moveOn(x, y);
-		
-		
-	}
-
-	
-	public void moveBy(int byX, int byY) {
-		center.moveBy(byX, byY);
-		
-	}
-	
-	
-	
 	public Point getCenter() {
 		return center;
 	}
-
 	public void setCenter(Point center) {
 		this.center = center;
 	}
-
 	public int getRadius() {
 		return radius;
 	}
-
-	public void setRadius(int radius) throws Exception {
-		if(radius ==0 || radius<0) {
-			throw new Exception("Unet je los radius");
-		}else {
-			this.radius = radius;
-		}
+	public void setRadius(int r){
+			this.radius = r;
 	}
-	
 
 }

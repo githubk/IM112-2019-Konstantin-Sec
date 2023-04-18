@@ -178,7 +178,7 @@ public class DlgRectangleEdit extends JDialog {
 									Integer.parseInt(textFieldHeight.getText().toString()) > 0
 									&& Integer.parseInt(textFieldX.getText().toString()) > 0
 									&& Integer.parseInt(textFieldY .getText().toString()) > 0) {
-								setComited(true);
+								check = true;
 								dispose();
 							}else {
 								JOptionPane.showMessageDialog(null, "You have to enter values greather than 0!", "ERROR", JOptionPane.ERROR_MESSAGE);

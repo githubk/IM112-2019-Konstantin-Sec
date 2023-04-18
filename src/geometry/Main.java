@@ -31,6 +31,9 @@ import java.util.HashMap;
 import javax.swing.JList;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+
+import stackAndSort.StackFrame;
+
 import java.awt.List;
 import java.awt.Panel;
 
@@ -96,32 +99,47 @@ public class Main extends JFrame {
 		panel.setLayout(null);
 		
 		JToggleButton tglbtnPoint = new JToggleButton("Point");
-		tglbtnPoint.setBounds(80, 0, 70, 21);
+		tglbtnPoint.setBounds(27, 0, 70, 21);
 		panel.add(tglbtnPoint);
 		
 		JToggleButton tglbtnLine = new JToggleButton("Line");
-		tglbtnLine.setBounds(160, 0, 67, 21);
+		tglbtnLine.setBounds(105, 0, 67, 21);
 		panel.add(tglbtnLine);
 		
 		JToggleButton tglbtnCircle = new JToggleButton("Circle");
-		tglbtnCircle.setBounds(237, 0, 69, 21);
+		tglbtnCircle.setBounds(182, 0, 69, 21);
 		panel.add(tglbtnCircle);
 		
 		JToggleButton tglbtnRectangle = new JToggleButton("Rectangle");
-		tglbtnRectangle.setBounds(316, 0, 102, 21);
+		tglbtnRectangle.setBounds(261, 0, 102, 21);
 		panel.add(tglbtnRectangle);
 		
 		JToggleButton tglbtnDonut = new JToggleButton("Donut");
-		tglbtnDonut.setBounds(428, 0, 92, 21);
+		tglbtnDonut.setBounds(373, 0, 92, 21);
 		panel.add(tglbtnDonut);
 		
 		JToggleButton tglbtnSelect = new JToggleButton("Select");
-		tglbtnSelect.setBounds(530, 0, 71, 21);
+		tglbtnSelect.setBounds(472, 0, 71, 21);
 		panel.add(tglbtnSelect);
 		
 		JToggleButton tglbtnDelete = new JToggleButton("Delete");
-		tglbtnDelete.setBounds(611, 0, 78, 21);
+		tglbtnDelete.setBounds(553, 0, 78, 21);
 		panel.add(tglbtnDelete);
+		
+		JButton btnNewButton = new JButton("Stack & Sort");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				StackFrame sf=new StackFrame();
+				sf.show();
+				
+				
+				
+				
+			}
+		});
+		btnNewButton.setBounds(641, 0, 111, 21);
+		panel.add(btnNewButton);
 		
 		tglbtnPoint.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {
@@ -360,170 +378,170 @@ public class Main extends JFrame {
 				if(tglbtnSelect.isSelected())
 				{
 
-					for(Shape s:canvas.getShapes())
-					{
-						if(s.contains(e.getX(),e.getY()))
+					try {
+						for(Shape s:canvas.getShapes())
 						{
-
-							if(s instanceof Point)
+							if(s.contains(e.getX(),e.getY()))
 							{
-								Point temp=(Point)s;
-								Point novi=new Point();
-								
-								dlgpoint=new DlgPoint();
-								
-								dlgpoint.getTextFieldX().setText(Integer.toString(temp.getX()));
-								dlgpoint.getTextFieldY().setText(Integer.toString(temp.getY()));
-								
-								dlgpoint.setVisible(true);
-								if(dlgpoint.check) 
+
+								if(s instanceof Point)
 								{
-									novi.setSelected(true);
-									novi.setC(dlgpoint.c);
-								novi.moveOn(Integer.parseInt(dlgpoint.getTextFieldX().getText()), Integer.parseInt(dlgpoint.getTextFieldY().getText()));
-	
-								canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
-								
-								repaint();
+									Point temp=(Point)s;
+									Point novi=new Point();
+									
+									dlgpoint=new DlgPoint();
+									
+									dlgpoint.getTextFieldX().setText(Integer.toString(temp.getX()));
+									dlgpoint.getTextFieldY().setText(Integer.toString(temp.getY()));
+									
+									dlgpoint.setVisible(true);
+									if(dlgpoint.check) 
+									{
+										novi.setSelected(true);
+										novi.setC(dlgpoint.c);
+									novi.moveOn(Integer.parseInt(dlgpoint.getTextFieldX().getText()), Integer.parseInt(dlgpoint.getTextFieldY().getText()));
+		
+									canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
+									
+									repaint();
+									}
+									
 								}
 								
-							}
-							
-							if(s instanceof Line)
-							{
-								Line temp=(Line)s;
-								Line novi=new Line();
-								
-								dlgline=new DlgLine();
-								
-								
-								dlgline.getTextFieldStartX().setText(Integer.toString(temp.getStartPoint().getX()));
-								dlgline.getTextFieldStartY().setText(Integer.toString(temp.getStartPoint().getY()));
-								dlgline.getTextFieldEndX().setText(Integer.toString(temp.getEndPoint().getX()));
-								dlgline.getTextFieldEndY().setText(Integer.toString(temp.getEndPoint().getY()));
-								dlgline.setVisible(true);
-								
-								if(dlgline.check)
+								if(s instanceof Line)
 								{
+									Line temp=(Line)s;
+									Line novi=new Line();
 									
-								novi.setSelected(true);
-								novi.setC(dlgline.c);
-								novi.setStartPoint(new Point(Integer.parseInt(dlgline.getTextFieldStartX().getText()),Integer.parseInt(dlgline.getTextFieldStartY().getText())));
-								novi.setEndPoint(new Point(Integer.parseInt(dlgline.getTextFieldEndX().getText()),Integer.parseInt(dlgline.getTextFieldEndY().getText())));		
-								
-								
-								canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
-								repaint();
-								
-								}	
-								
-							}
-							
-							if(s instanceof Circle)
-							{
-								Circle temp=(Circle)s;
-								Circle novi=new Circle();
-								
-								dlgcircleEdit=new DlgCircleEdit();
-								
-								
-								dlgcircleEdit.getTextFieldRadius().setText(Integer.toString(temp.getRadius()));
-								dlgcircleEdit.getTextFieldX().setText(Integer.toString(temp.getCenter().getX()));
-								dlgcircleEdit.getTextFieldY().setText(Integer.toString(temp.getCenter().getY()));
-								
-								dlgcircleEdit.setVisible(true);
-								
-								if(dlgcircleEdit.check)
-								{
+									dlgline=new DlgLine();
+									
+									
+									dlgline.getTextFieldStartX().setText(Integer.toString(temp.getStartPoint().getX()));
+									dlgline.getTextFieldStartY().setText(Integer.toString(temp.getStartPoint().getY()));
+									dlgline.getTextFieldEndX().setText(Integer.toString(temp.getEndPoint().getX()));
+									dlgline.getTextFieldEndY().setText(Integer.toString(temp.getEndPoint().getY()));
+									dlgline.setVisible(true);
+									
+									if(dlgline.check)
+									{
+										
 									novi.setSelected(true);
-									novi.setCenter(new Point(Integer.parseInt(dlgcircleEdit.getTextFieldX().getText()),Integer.parseInt(dlgcircleEdit.getTextFieldY().getText())));
-									try {
-										novi.setRadius(Integer.parseInt(dlgcircleEdit.getTextFieldRadius().getText()));
-									} catch (NumberFormatException e1) {
-										
-										e1.printStackTrace();
-									} catch (Exception e1) {
-										
-										e1.printStackTrace();
-									}
-									novi.setC(dlgcircleEdit.c);
-									
-									canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
+									novi.setC(dlgline.c);
+									novi.setStartPoint(new Point(Integer.parseInt(dlgline.getTextFieldStartX().getText()),Integer.parseInt(dlgline.getTextFieldStartY().getText())));
+									novi.setEndPoint(new Point(Integer.parseInt(dlgline.getTextFieldEndX().getText()),Integer.parseInt(dlgline.getTextFieldEndY().getText())));		
+									canvas.getShapes().remove(s);
+									canvas.getShapes().add(novi);
+
 									repaint();
 									
+									}	
+									
 								}
+								
+							if(s instanceof Rectangle)
+									{
+										Rectangle temp=(Rectangle)s;
+										Rectangle novi=new Rectangle();
+										
+										dlgrectangleEdit=new DlgRectangleEdit();
+
+										dlgrectangleEdit.getTextFieldWidth().setText(Integer.toString(temp.getWidth()));
+										dlgrectangleEdit.getTextFieldHeight().setText(Integer.toString(temp.getHeight()));
+										dlgrectangleEdit.getTextFieldX().setText(Integer.toString(temp.getUpperLeft().getX()));
+										dlgrectangleEdit.getTextFieldY().setText(Integer.toString(temp.getUpperLeft().getY()));
+										dlgrectangleEdit.setVisible(true);
+										
+										if(dlgrectangleEdit.check)
+										{
+											novi.setSelected(true);
+											novi.setC(dlgrectangleEdit.c);
+											novi.setWidth(Integer.parseInt(dlgrectangleEdit.getTextFieldWidth().getText()));
+											novi.setHeight(Integer.parseInt(dlgrectangleEdit.getTextFieldHeight().getText()));
+											novi.setUpperLeft(new Point(Integer.parseInt(dlgrectangleEdit.getTextFieldX().getText()),Integer.parseInt(dlgrectangleEdit.getTextFieldY().getText())));
+											canvas.getShapes().remove(s);
+											canvas.getShapes().add(novi);
+											repaint();
+										}
+										
+									}
+										
+								
+									if(s instanceof Circle)
+									{
+										if(s.getClass() == Donut.class) {
+											Donut temp=(Donut)s;
+											Donut novi=new Donut();
+											
+											dlgdonutEdit=new DlgDonutEdit();
+											
+											dlgdonutEdit.getTextFieldOR().setText(Integer.toString(temp.getRadius()));
+											dlgdonutEdit.getTextFieldIR().setText(Integer.toString(temp.getInnerRadius()));
+											dlgdonutEdit.getTextFieldX().setText(Integer.toString(temp.getCenter().getX()));
+											dlgdonutEdit.getTextFieldY().setText(Integer.toString(temp.getCenter().getY()));
+											
+											dlgdonutEdit.setVisible(true);
+											
+											if(dlgdonutEdit.check)
+											{
+												novi.setSelected(true);
+												novi.setC(dlgdonutEdit.c);
+												novi.setCenter(new Point(Integer.parseInt(dlgdonutEdit.getTextFieldX().getText()),Integer.parseInt(dlgdonutEdit.getTextFieldY().getText())));
+												try {
+													novi.setRadius(Integer.parseInt(dlgdonutEdit.getTextFieldOR().getText()));
+												} catch (NumberFormatException e1) {
+								
+													e1.printStackTrace();
+												} catch (Exception e1) {
+													e1.printStackTrace();
+												}
+												
+												novi.setInnerRadius(Integer.parseInt(dlgdonutEdit.getTextFieldIR().getText()));
+												
+												canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
+											repaint();
+										}
+									}else {
+										Circle temp=(Circle)s;
+										Circle novi=new Circle();
+										
+										dlgcircleEdit=new DlgCircleEdit();
+										
+										
+										dlgcircleEdit.getTextFieldRadius().setText(Integer.toString(temp.getRadius()));
+										dlgcircleEdit.getTextFieldX().setText(Integer.toString(temp.getCenter().getX()));
+										dlgcircleEdit.getTextFieldY().setText(Integer.toString(temp.getCenter().getY()));
+										
+										dlgcircleEdit.setVisible(true);
+										
+										if(dlgcircleEdit.check)
+										{
+											novi.setSelected(true);
+											novi.setCenter(new Point(Integer.parseInt(dlgcircleEdit.getTextFieldX().getText()),Integer.parseInt(dlgcircleEdit.getTextFieldY().getText())));
+											try {
+												novi.setRadius(Integer.parseInt(dlgcircleEdit.getTextFieldRadius().getText()));
+											} catch (NumberFormatException e1) {
+												
+												e1.printStackTrace();
+											} catch (Exception e1) {
+												
+												e1.printStackTrace();
+											}
+											novi.setC(dlgcircleEdit.c);
+											
+											canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
+											repaint();	
+										
+										}
+										}
+										
+									}
 							}
 								
 								
-								if(s instanceof Rectangle)
-								{
-									Rectangle temp=(Rectangle)s;
-									Rectangle novi=new Rectangle();
-									
-									dlgrectangleEdit=new DlgRectangleEdit();
-
-									dlgrectangleEdit.getTextFieldWidth().setText(Integer.toString(temp.getWidth()));
-									dlgrectangleEdit.getTextFieldHeight().setText(Integer.toString(temp.getHeight()));
-									dlgrectangleEdit.getTextFieldX().setText(Integer.toString(temp.getUpperLeft().getX()));
-									dlgrectangleEdit.getTextFieldY().setText(Integer.toString(temp.getUpperLeft().getY()));
-									dlgrectangleEdit.setVisible(true);
-									
-									if(dlgrectangleEdit.check)
-									{
-										novi.setSelected(true);
-										novi.setC(dlgrectangleEdit.c);
-										novi.setWidth(Integer.parseInt(dlgrectangleEdit.getTextFieldWidth().getText()));
-										novi.setHeight(Integer.parseInt(dlgrectangleEdit.getTextFieldHeight().getText()));
-										novi.setUpperLeft(new Point(Integer.parseInt(dlgrectangleEdit.getTextFieldX().getText()),Integer.parseInt(dlgrectangleEdit.getTextFieldY().getText())));
-										
-										canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
-										repaint();
-									}
-									
-								}
-									
-							
-								if(s instanceof Donut)
-								{
-									Donut temp=(Donut)s;
-									Donut novi=new Donut();
-									
-									dlgdonutEdit=new DlgDonutEdit();
-									
-									dlgdonutEdit.getTextFieldOR().setText(Integer.toString(temp.getRadius()));
-									dlgdonutEdit.getTextFieldIR().setText(Integer.toString(temp.getInnerRadius()));
-									dlgdonutEdit.getTextFieldX().setText(Integer.toString(temp.getCenter().getX()));
-									dlgdonutEdit.getTextFieldY().setText(Integer.toString(temp.getCenter().getY()));
-									
-									dlgdonutEdit.setVisible(true);
-									
-									if(dlgdonutEdit.check)
-									{
-										novi.setSelected(true);
-										novi.setC(dlgdonutEdit.c);
-										novi.setCenter(new Point(Integer.parseInt(dlgdonutEdit.getTextFieldX().getText()),Integer.parseInt(dlgdonutEdit.getTextFieldY().getText())));
-										try {
-											novi.setRadius(Integer.parseInt(dlgdonutEdit.getTextFieldOR().getText()));
-										} catch (NumberFormatException e1) {
-						
-											e1.printStackTrace();
-										} catch (Exception e1) {
-											e1.printStackTrace();
-										}
-										
-										novi.setInnerRadius(Integer.parseInt(dlgdonutEdit.getTextFieldIR().getText()));
-										
-										canvas.getShapes().set(canvas.getShapes().indexOf(temp), novi);
-									repaint();	
-									}
-									
-									
-								}
 						}
-							
-							
+					}catch(Exception iob) {
+						
 					}
-
 				}
 					
 					

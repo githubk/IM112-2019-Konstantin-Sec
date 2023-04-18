@@ -33,6 +33,7 @@ private ArrayList<Shape> shapes = new ArrayList<Shape>();
 			s.draw(g);
 			}
 			else {
+				g.setColor(s.getC());
 				s.draw(g);
 			}
 			
