@@ -122,7 +122,7 @@ public class StackFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				
 				DlgRectangleEdit dlgRect = new DlgRectangleEdit();
-				dlgRect.setVisible(true);
+				
 				int width = Integer.parseInt(dlgRect.getTextFieldWidth().getText());
 				int height = Integer.parseInt(dlgRect.getTextFieldHeight().getText());
 				int x = Integer.parseInt(dlgRect.getTextFieldX().getText());
